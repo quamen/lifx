@@ -1,0 +1,2 @@
+defmodule LIFX do
+end
