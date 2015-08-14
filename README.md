@@ -1,4 +1,4 @@
 LIFX
 ====
 
-** TODO: Add description **
+An Elixir library for communicating with LIFX bulbs.
