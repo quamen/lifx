@@ -6,15 +6,14 @@ defmodule LIFX.LAN.FrameAddress do
             res_required: 0, # bool       Response message required
             sequence:     0  # uint8_t    Wrap around message sequence number
 
-  defmacro binary(target, reserved, reserved2, ack_required, res_required, sequence) do
-    quote do
-      <<unquote(target)::little-unsigned-integer-size(64),
-        unquote(reserved)::little-unsigned-integer-size(48),
-        unquote(reserved2)::little-unsigned-integer-size(6),
-        unquote(ack_required)::little-unsigned-integer-size(1),
-        unquote(res_required)::little-unsigned-integer-size(1),
-        unquote(sequence)::little-unsigned-integer-size(8)
-      >>
-    end
+  def binary(frame_address) do
+    <<rrar::little-unsigned-integer-size(56)>> = <<frame_address.reserved::unsigned-integer-size(48),
+                                                   frame_address.reserved2::unsigned-integer-size(6),
+                                                   frame_address.ack_required::unsigned-integer-size(1),
+                                                   frame_address.res_required::unsigned-integer-size(1)>>
+
+    <<frame_address.target::little-unsigned-integer-size(64),
+      rrar::little-unsigned-integer-size(56),
+      frame_address.sequence::little-unsigned-integer-size(8)>>
   end
 end

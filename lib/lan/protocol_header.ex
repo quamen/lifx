@@ -3,12 +3,10 @@ defmodule LIFX.LAN.ProtocolHeader do
             type:      0,  # uint16_t  Message type determines the payload being used
             reserved2: 0   #           Reserved
 
-  defmacro binary(reserved, type, reserved2) do
-    quote do
-      <<unquote(reserved)::little-unsigned-integer-size(64),
-        unquote(type)::little-unsigned-integer-size(16),
-        unquote(reserved2)::little-unsigned-integer-size(16)
+  def binary(protocol_header) do
+      <<protocol_header.reserved::little-unsigned-integer-size(64),
+        protocol_header.type::little-unsigned-integer-size(16),
+        protocol_header.reserved2::little-unsigned-integer-size(16)
       >>
-    end
   end
 end
