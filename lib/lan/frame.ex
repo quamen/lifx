@@ -7,11 +7,12 @@ defmodule LIFX.LAN.Frame do
             source:      0     # uint32_t  Source identifier: unique value set by the client, used by responses
 
   def binary(frame) do
-    <<otap::little-unsigned-integer-size(16)>> = <<frame.origin::unsigned-integer-size(2),
-                                                  frame.tagged::unsigned-integer-size(1),
-                                                  frame.addressable::unsigned-integer-size(1),
-                                                  frame.protocol::unsigned-integer-size(12)>>
+    <<otap::unsigned-integer-size(16)>> = <<frame.origin::unsigned-integer-size(2),
+                                            frame.tagged::unsigned-integer-size(1),
+                                            frame.addressable::unsigned-integer-size(1),
+                                            frame.protocol::unsigned-integer-size(12)>>
 
+    IO.puts otap
     <<frame.size::little-unsigned-integer-size(16),
       otap::little-unsigned-integer-size(16),
       frame.source::little-unsigned-integer-size(32)>>

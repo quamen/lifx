@@ -7,10 +7,10 @@ defmodule LIFX.LAN.FrameAddress do
             sequence:     0  # uint8_t    Wrap around message sequence number
 
   def binary(frame_address) do
-    <<rrar::little-unsigned-integer-size(56)>> = <<frame_address.reserved::unsigned-integer-size(48),
-                                                   frame_address.reserved2::unsigned-integer-size(6),
-                                                   frame_address.ack_required::unsigned-integer-size(1),
-                                                   frame_address.res_required::unsigned-integer-size(1)>>
+    <<rrar::unsigned-integer-size(56)>> = <<frame_address.reserved::unsigned-integer-size(48),
+                                            frame_address.reserved2::unsigned-integer-size(6),
+                                            frame_address.ack_required::unsigned-integer-size(1),
+                                            frame_address.res_required::unsigned-integer-size(1)>>
 
     <<frame_address.target::little-unsigned-integer-size(64),
       rrar::little-unsigned-integer-size(56),
