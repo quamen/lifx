@@ -12,7 +12,6 @@ defmodule LIFX.LAN.Frame do
                                             frame.addressable::unsigned-integer-size(1),
                                             frame.protocol::unsigned-integer-size(12)>>
 
-    IO.puts otap
     <<frame.size::little-unsigned-integer-size(16),
       otap::little-unsigned-integer-size(16),
       frame.source::little-unsigned-integer-size(32)>>
